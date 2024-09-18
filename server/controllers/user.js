@@ -61,7 +61,7 @@ if(!verify) return res.status(400).json({
     message: "Otp Expired",
 });
 
-if(verity.otp !== otp) return res.status(400).json({
+if(verify.otp !== otp) return res.status(400).json({
     message: "Otp Invalid",
 });
 
