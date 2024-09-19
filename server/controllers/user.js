@@ -61,7 +61,7 @@ if(!verify) return res.status(400).json({
     message: "Otp Expired",
 });
 
-if(verity.otp !== otp) return res.status(400).json({
+if(verify.otp !== otp) return res.status(400).json({
     message: "Otp Invalid",
 });
 
@@ -73,5 +73,41 @@ await User.create({
 res.json({
     message: "User registered!",
 });
+
+});
+
+export const loginUser = TryCatch(async(req,res)=>{
+    const {email, password} =req.body
+
+    const user = await User.findOne({email})
+
+    if(!user) return res.status(400).json({
+        message: "Invalid email "
+    });
+    
+    const matchPassword = await bcrypt.compare(password, user.password);
+
+    if(!matchPassword) return res.status(400).json({
+        message: "Invalid password "
+    });
+
+    const token =  jwt.sign({_id: user._id}, process.env.Jwt_Sec, {
+        expiresIn : "15d",
+    });
+
+    res.json({
+        message: `Welcome back, ${user.name}`,
+        token,
+        user,
+    });
+    
+});
+
+export const myProfile = TryCatch(async(req,res)=>{
+
+    const user = await User.findById(req.user._id)
+
+    res.json({user});
+
 
 });

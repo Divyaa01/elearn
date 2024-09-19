@@ -19,9 +19,13 @@ app.get('/',(req,res)=>{
 
 //importing routes
 import userRoutes from './routes/user.js'
+import CourseRoutes from './routes/course.js'
+import AdminRoutes from './routes/admin.js'
 
 //using routes
 app.use("/api", userRoutes)
+app.use("/api", CourseRoutes)
+app.use("/api", AdminRoutes)
 
 
 app.listen(port , () =>{
