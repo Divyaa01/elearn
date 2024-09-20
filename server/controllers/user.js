@@ -75,7 +75,7 @@ res.json({
 });
 
 });
-<<<<<<< HEAD
+
 
 export const loginUser = TryCatch(async(req,res)=>{
     const {email, password} =req.body
@@ -112,5 +112,4 @@ export const myProfile = TryCatch(async(req,res)=>{
 
 
 });
-=======
->>>>>>> 5b83630d10958aea25646b6160062bba06e2bd3b
+
